@@ -52,8 +52,18 @@ async function checkUsernameFree(req, res, next) {
     "message": "Invalid credentials"
   }
 */
-function checkUsernameExists() {
+function checkUsernameExists(req, res, next) {
+  const {username} = req.body
 
+  if (username === undefined) {
+    next({
+      status: 401,
+      message: 'Invalid credentials'
+    })
+  } else {
+    req.body.name = req.body.name.trim()
+    next()
+  }
 }
 
 /*
