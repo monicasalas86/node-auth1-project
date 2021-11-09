@@ -19,6 +19,7 @@ const session = require('express-session')
 const Store = require('connect-session-knex')(session)
 
 const userRouter = require('./users/users-router')
+const authRouter = require('./auth/auth-router')
 
 const server = express();
 
@@ -45,6 +46,7 @@ server.use(session({
 }))
 
 server.use('/api/users', userRouter)
+server.use('/api/auth', authRouter)
 
 server.get("/", (req, res) => {
   res.json({
